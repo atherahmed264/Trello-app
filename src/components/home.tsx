@@ -162,7 +162,7 @@ export default function HomeComponent(){
     }
 
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
+        if (event && reason === 'clickaway') {
             return;
         }
 
