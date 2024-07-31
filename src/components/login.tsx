@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "./constants";
 import Snackbar from "@mui/material/Snackbar";
 
+const PIX = 942
 
 export default function LoginComponent(){
     let [logIn,setIsLogin] = useState(true);
     let [email,setEmail] = useState(localStorage.getItem("email") || "");
     let [password,setPassword] = useState(localStorage.getItem("pass") || "");
+
+    let [isMobile,setIsMobile] = useState(window.innerWidth <= PIX);
 
     let [semail,setSEmail] = useState("");
     let [name,setName] = useState("");
@@ -16,6 +19,10 @@ export default function LoginComponent(){
 
     const [showMsg, setShowMsg] = useState(false);
     const [displayMessage, setDisplayMessage] = useState("");
+
+    useEffect(() =>{
+        window.addEventListener('resize',() => setIsMobile(window.innerWidth <= PIX));
+    },[])
 
     const navigate = useNavigate();
 
@@ -73,7 +80,10 @@ export default function LoginComponent(){
     return(
     <>
         <div className="min-h-screen min-w-screen flex justify-center bg-gradient-to-b from-violet-200 to-violet-400">
-            {logIn ? loginDiv(setIsLogin,login,setEmail,setPassword,email,password) : signupDiv(setIsLogin,signUp,setSEmail,setName,setSPassword,semail,spassword,name)}
+            { !isMobile
+             ?  logIn ? loginDiv(setIsLogin,login,setEmail,setPassword,email,password) : signupDiv(setIsLogin,signUp,setSEmail,setName,setSPassword,semail,spassword,name)
+            : <p className="text-3xl text-center m-auto">App not optimized for Smaller Devices Please enable desktop mode</p>
+            }
         </div>
         <Snackbar
         open={showMsg}
