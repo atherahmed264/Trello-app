@@ -1,5 +1,6 @@
 # React + TypeScript + Vite
 
+Trello like application based on MERN stack using node js & Mongo DB as backend
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
