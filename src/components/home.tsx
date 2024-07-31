@@ -89,7 +89,8 @@ export default function HomeComponent(){
             })
             setData(response);
             setOpen(false)
-        }).catch(_ => {
+        }).catch(er => {
+            snackbar((er.response?.data?.message || er.message) +" displaying dummy data");
             setData(dummy)
         })
     }
@@ -121,8 +122,8 @@ export default function HomeComponent(){
             setpriority("");
             setdeadline("");
             snackbar("Task Created Successfully");
-        }).catch(_ => {
-
+        }).catch(er => {
+            snackbar(er.response?.data?.message || er.message)
         })
 
     }
@@ -131,8 +132,8 @@ export default function HomeComponent(){
         axios.patch(API_URL+TASK_URL,obj).then(() => {
             getTasks();
             snackbar("Task Status Updated")
-        }).catch(() => {
-
+        }).catch((er) => {
+            snackbar(er.response?.data?.message || er.message)
         })
     }
 

@@ -54,6 +54,8 @@ export default function LoginComponent(){
                 sessionStorage.setItem('userId',res.data.data._id)
                 navigate('/home');
             }
+        }).catch(er => {
+            snackbar(er.response?.data?.message || er.message);
         });
     }
 
@@ -74,7 +76,7 @@ export default function LoginComponent(){
                 setPassword(spassword);
                 setIsLogin(true);
             }
-        });
+        }).catch(er => snackbar(er.response?.data?.message || er.message));
     }
     
     return(
